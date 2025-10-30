@@ -10,8 +10,8 @@ int main() {
     for (int i = 0; i < m; i++) {
         cin >> arr[i];
     }
-    int l = 1,r=1e9;
-    int res = 1e9;
+    int l = 1,r=2e9;
+    int res = 2e9;
     while(l<=r){
         int mid = (l+r)/2;
         int cnt = 0;
