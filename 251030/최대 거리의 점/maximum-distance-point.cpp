@@ -12,7 +12,7 @@ int main() {
     }
 
     int res = 0;
-    int l =1,r=1e9;
+    int l =1,r=2e9;
     while(l<=r){
         int mid = (l+r)/2;
         int cnt =1;
