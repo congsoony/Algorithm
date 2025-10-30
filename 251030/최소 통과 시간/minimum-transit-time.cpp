@@ -1,7 +1,7 @@
 #include<bits/stdc++.h>
 
 using namespace std;
-
+#define ll long long
 int n, m;
 int arr[100000];
 
@@ -10,11 +10,11 @@ int main() {
     for (int i = 0; i < m; i++) {
         cin >> arr[i];
     }
-    int l = 1,r=2e9;
-    int res = 2e9;
+    ll l = 1,r=1e15;
+    ll res = 1e15;
     while(l<=r){
-        int mid = (l+r)/2;
-        int cnt = 0;
+        ll mid = (l+r)/2;
+        ll cnt = 0;
         for(int i =0;i<m;i++){
             cnt+=mid/arr[i];
         }
