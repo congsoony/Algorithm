@@ -22,7 +22,7 @@ int main() {
     cin>>s2;
     v = vector<int>(s1.size());
     for(int i =0;i<s1.size();i++)cin>>v[i];
-    int l=1,r=s1.size();
+    int l=0,r=s1.size();
     int res =0;
 
     while(l<=r){
