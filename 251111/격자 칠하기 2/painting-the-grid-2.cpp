@@ -50,7 +50,7 @@ int main() {
             cin >> board[i][j];
         }
     }
-    int l = 1,r = 1e6;
+    int l = 0,r = 1e6;
     int res =1e9;
     while(l<=r){
         int mid = (l+r)/2;
