@@ -31,6 +31,6 @@ int main() {
         }
     }
     for(int i =1;i<=n;i++){
-        cout<<dist[i]<<"\n";
+        cout<<(dist[i]==2e9?-1:dist[i])<<"\n";
     }
 }
