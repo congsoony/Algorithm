@@ -4,6 +4,7 @@ using namespace std;
 ll n,m,x;
 vector<tuple<ll,ll,ll>> v[1001];
 int main() {
+    freopen("input.txt","r",stdin);
     cin>>n>>m>>x;
     ll a,b,c,d;
     for(int i =0;i<m;i++){
@@ -27,7 +28,7 @@ int main() {
             ll nextsum  = sum + L;
             ll nextC = min(minc,C);
             ll nextcost = nextsum + x / nextC;
-            if(dist[next]>nextcost){
+            if(dist[next]>=nextcost){
                 q.push({next,nextsum,nextC});
                 dist[next]=nextcost;
             }
