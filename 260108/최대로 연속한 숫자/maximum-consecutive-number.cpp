@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 set<int> s;
-multiset<int> leng;
+map<int,int> leng;
 int n,m;
 int main() {
     ios::sync_with_stdio(false);
@@ -12,7 +12,7 @@ int main() {
     int a;
     s.insert(-1);
     s.insert(n+1);
-    leng.insert(n+1);
+    leng[n+1]++;
 
 
     for(int i=0;i<m;i++){
@@ -21,12 +21,15 @@ int main() {
         int r = *it;
         int l = *prev(it);
         int blen = r-l-1;
-        leng.erase(blen);
+        leng[blen]--;
+        if(leng[blen]==0){
+            leng.erase(blen);
+        }
         int leftlen = a-l-1;
         int rightlen = r-a-1;
-        leng.insert(leftlen);
-        leng.insert(rightlen);
+        leng[leftlen]++;
+        leng[rightlen]++;
         s.insert(a);
-        cout<<*leng.rbegin()<<"\n";
+        cout<<leng.rbegin()->first<<"\n";
     }
 }
