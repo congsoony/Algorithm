@@ -19,11 +19,14 @@ public class Main {
         }
         int res =0;
         for(int i =0;i<n;i++){
-            if(tr.ceiling(l.get(i))!=null)
+            Integer a = tr.ceiling(l.get(i));
+            if(a!=null){
                 res++;
+                tr.remove(a);
+            }
         }
         System.out.println(res);
-        
+
     }
 
 }
