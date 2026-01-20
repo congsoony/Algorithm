@@ -14,24 +14,31 @@ public class Main {
         }
         int[][] blackStones = new int[n][2];
         TreeSet<int[]>tr =new TreeSet<>((a,b)->{
-            if(a[1]==b[1])return a[0]-b[0];
-            return a[1]-b[1];
+            if(a[0]==b[0])return a[1]-b[1];
+            return a[0]-b[0];
         });
 
         for (int i = 0; i < n; i++) {
             blackStones[i][0] = sc.nextInt();
             blackStones[i][1] = sc.nextInt();
-            tr.add(new int[]{blackStones[i][0],blackStones[i][1]});
+            tr.add(new int[]{-blackStones[i][0],blackStones[i][1]});
 
         }
         Arrays.sort(redStones);
         int res = 0;
+
+//        for(int i=0;i<c;i++){
+//            System.out.println(redStones[i]);
+//        }
+        //for(int t[] :tr) System.out.println(-t[0]+" "+t[1]);
+
         for(int i =0;i<c;i++){
-            int t[]=tr.ceiling(new int[]{0,redStones[i]});
+            int t[]=tr.ceiling(new int[]{-redStones[i],redStones[i]});
             if(t!=null){
-                if(t[0]<=redStones[i]){
+                if(redStones[i]<=t[1]){
                     tr.remove(t);
                     res++;
+
                 }
             }
         }
