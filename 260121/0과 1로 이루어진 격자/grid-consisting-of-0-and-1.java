@@ -12,13 +12,22 @@ public class Main {
             }
         }
         int res = 0;
-        for (int i = n-1; i >=0; i--) {  
-            for(int j =n-1;j>=0;j--){
-                if((arr[i][j]+res)%2==1){
+
+        for (int i = n-1; i >=0; i--) {
+            for (int j = n - 1; j >= 0; j--) {
+                if (arr[i][j] == 1) {
                     res++;
+                    flip(arr,i,j);
                 }
             }
         }
         System.out.println(res);
+    }
+    public static void flip(int arr[][],int y,int x){
+        for(int i =0;i<=y;i++){
+            for(int j =0;j<=x;j++){
+                arr[i][j]^=1;
+            }
+        }
     }
 }
