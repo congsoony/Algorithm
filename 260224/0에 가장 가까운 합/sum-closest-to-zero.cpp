@@ -12,11 +12,11 @@ int main() {
     int res = 2e9;
     for(int i =0;i<n;i++){
         int idx = lower_bound(v.begin(),v.begin()+i,-v[i])-v.begin();
-        if(idx!=i){
+        if(idx!=i && idx !=n){
             res = min(res,abs(v[i]+v[idx]));
         }
         idx = lower_bound(v.begin()+i+1,v.end(),-v[i])-v.begin();
-        if(idx!=i){
+        if(idx!=i&&idx!=n){
             res = min(res,abs(v[i]+v[idx]));
         }
     }
