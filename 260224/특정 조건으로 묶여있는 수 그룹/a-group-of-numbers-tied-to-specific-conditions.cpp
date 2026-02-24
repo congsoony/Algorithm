@@ -2,6 +2,7 @@
 using namespace std;
 
 int main() {
+    freopen("input.txt","r",stdin);
     int n,k;
     cin>>n>>k;
     vector<int> v(n);
@@ -11,10 +12,11 @@ int main() {
     int res = 0;
     int mx = v[0];
     int mn = v[0];
+    vector<int> ans;
     for(int i =1;i<n;i++){
         if(abs(mx-v[i])>k || abs(mn-v[i])>k){
             if(i-1 >l){
-                res+=i-l;
+                ans.push_back(i-l);
             }
             mx = mn = v[i];
             l=i;
@@ -24,5 +26,6 @@ int main() {
             mn = min(mn,v[i]);
         }
     }
-    cout<<res<<"\n";
+    sort(ans.begin(),ans.end(),greater<int>());
+    cout<<ans[0]+ans[1]<<"\n";
 }
