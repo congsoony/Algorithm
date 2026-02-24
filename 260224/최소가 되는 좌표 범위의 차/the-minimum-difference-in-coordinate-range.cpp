@@ -20,5 +20,5 @@ int main() {
         if(abs(v[l].second-v[i].second)>=d)
             res = min(res,v[i].first-v[l].first);
     }
-    cout<<res<<"\n";
+    cout<<(res==1e9?-1:res)<<"\n";
 }
