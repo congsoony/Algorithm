@@ -2,19 +2,22 @@
 using namespace std;
 int n;
 int main() {
+    freopen("input.txt","r",stdin);
     cin>>n;
     vector<int>v(n);
-    for(int &a:v)cin>>a;
+    for(int i =0;i<n;i++){
+        cin>>v[i];
+    }
     sort(v.begin(),v.end());
-    int l =0,r=n-1;
-
-    int res =2e9;
-    while(l<r){
-        if(r+l>0){
-            res = min(res,abs(v[r--]+v[l]));
+    int res = 2e9;
+    for(int i =0;i<n;i++){
+        int idx = lower_bound(v.begin(),v.begin()+i,-v[i])-v.begin();
+        if(idx!=i){
+            res = min(res,abs(v[i]+v[idx]));
         }
-        else{
-            res = min(res,abs(v[r]+v[l--]));
+        idx = lower_bound(v.begin()+i+1,v.end(),-v[i])-v.begin();
+        if(idx!=i){
+            res = min(res,abs(v[i]+v[idx]));
         }
     }
     cout<<res<<"\n";
