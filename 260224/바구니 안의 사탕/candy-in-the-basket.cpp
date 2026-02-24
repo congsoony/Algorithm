@@ -5,20 +5,22 @@ int main() {
     freopen("input.txt","r",stdin);
     ll n,k;
     cin>>n>>k;
-    ll offset = 4e6;
-    vector<ll>sum(9e6);
+    vector<pair<ll,ll>> v;
     for(int i =0;i<n;i++){
-        int a,b;
+        ll a,b;
         cin>>a>>b;
-        sum[b+offset]=a;
+        v.push_back({b,a});
     }
-
-    for(int i =offset+1;i<offset+2e6;i++){
-        sum[i] +=sum[i-1];
-    }
-    ll res = 0;
-    for(int i =offset+1;i<=offset+2e6;i++){
-        res = max(res,sum[i]-sum[i-2*k-1]);
+    sort(v.begin(),v.end());
+    int l = 0;
+    ll res = v[0].second;
+    ll sum=res;
+    for(int i =1;i<n;i++){
+        while(v[i].first-v[l].first>2*k&&l<=i){
+            sum-=v[l++].second;
+        }
+        sum+=v[i].second;
+        res = max(res,sum);
     }
     cout<<res<<"\n";
 }
