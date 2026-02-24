@@ -12,7 +12,7 @@ int main() {
         sum[b+offset]=a;
     }
 
-    for(int i =offset;i<offset+1e6;i++){
+    for(int i =offset+1;i<offset+1e6;i++){
         sum[i] +=sum[i-1];
     }
     ll res = 0;
