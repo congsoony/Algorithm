@@ -47,9 +47,6 @@ int main(){
         if(dist1[y] + dist2[i]== dist1[i]){
             res = min(res,2*dist1[i]);
         }
-        else if(dist2[x]+dist1[i]==dist2[i]){
-            res = min(res,2*dist2[i]);           
-        }
         else{
             res = min(res,dist1[i]*2 + dist2[i]*2);
         }
