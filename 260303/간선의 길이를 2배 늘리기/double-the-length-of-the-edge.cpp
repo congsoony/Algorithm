@@ -45,14 +45,13 @@ int main() {
     while(cur!=1){
         for(int i =0;i<v[cur].size();i++){
             if(originaldist[cur] == originaldist[parent[cur]]+v[cur][i].second){
-                arr[cur][parent[cur]]= arr[parent[cur]][cur] = 1;
                 cur=parent[cur];
                 path.push_back(cur);
                 break;
             }
         }
     }
-    int res = 1e9;
+    int res = 0;
 
     reverse(path.begin(),path.end());
     for(int i =1;i<path.size();i++){
@@ -61,8 +60,7 @@ int main() {
         arr[a][b] = arr[b][a] = 1;
         vector<int> dist = dijkstra(1);
         arr[a][b]=arr[b][a]=0;
-        
-        res = min(res,abs(originaldist[n]-dist[n]));
+        res = max(res,abs(originaldist[n]-dist[n]));
     }
     cout<<res<<"\n";
 }
