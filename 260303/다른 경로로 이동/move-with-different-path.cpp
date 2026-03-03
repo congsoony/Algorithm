@@ -19,7 +19,7 @@ vector<ll> dijkstra(ll start){
             ll next = v[cur][i].first;
             ll nextCost = cost + v[cur][i].second;
             if(check.count({cur,next}))continue;
-            if(nextCost<dist[next]){
+            if(nextCost<=dist[next]){
                 dist[next] = nextCost;
                 parent[next]=cur;
                 pq.push({nextCost,next});
@@ -44,20 +44,24 @@ int main() {
     for(int i =1;i<=n;i++)sort(v[i].begin(),v[i].end());
     
     vector<ll> dist = dijkstra(1);
+
     ll res = 0;
     ll cur = n;
+    vector<ll> path={n};
     while(cur!=1){
         for(int i=v[cur].size()-1;i>=0;i--){
             if(dist[cur]==dist[parent[cur]]+v[cur][i].second){
                 check.insert({parent[cur],cur});
                 check.insert({cur,parent[cur]});
                 cur=parent[cur];
+                path.push_back(cur);
                 break;
             }
         }
     }
- 
-  
+    // reverse(path.begin(),path.end());
+    // for(ll p : path)cout<<p<<" ";
+    // cout<<"\n";
     vector<ll> dist2 = dijkstra(1);
     cout<<dist2[n]<<"\n";
 }
