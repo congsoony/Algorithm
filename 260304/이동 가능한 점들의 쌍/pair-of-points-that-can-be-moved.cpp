@@ -3,7 +3,7 @@ using namespace std;
 int n,m,p,q;
 int main() {
     cin>>n>>m>>p>>q;
-    vector<vector<long long>> w(n+1,vector<int>(n+1,1e15));
+    vector<vector<long long>> w(n+1,vector<long long>(n+1,1e15));
     for(int i =0;i<m;i++){
         int a,b,c;
         cin>>a>>b>>c;
@@ -18,13 +18,13 @@ int main() {
         }
     }
     
-    int res = 0;
+    long long res = 0;
     int cnt = 0;
 
     for(int i =0;i<q;i++){
         int a,b;
         cin>>a>>b;
-        int cost = 1e15;
+        long long cost = 1e15;
         for(int j =1;j<=p;j++){
             if(w[a][j]+w[j][b]<1e15){
                 cost = min(cost,w[a][j]+w[j][b]);
