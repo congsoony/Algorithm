@@ -1,81 +1,46 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
+#define ll long long
 
-const long long MOD = 1000000007LL;
+ll mod = 1e9+7;
 
-string N;
-int L;
+ll dp[100005][2][2][3];
+string n;
 
-// memo[pos][rem]
-// tight == false일 때만 저장
-// pos번째 자리까지 진행했고, 현재 자리수 합 % 3 == rem일 때
-// 만들 수 있는 "박수 안 치는 숫자"의 개수
-long long memo[100005][3];
-
-bool allowedDigit(int d) {
-    return d != 3 && d != 6 && d != 9;
+void input(){
+    cin>>n;
 }
 
-long long dfs(int pos, int rem, bool tight) {
-    // 모든 자리를 다 정한 경우
-    if (pos == L) {
-        // rem != 0이면 3의 배수가 아님
-        // 즉 박수를 안 치는 숫자
-        return rem != 0 ? 1 : 0;
+ll dfs(ll idx,ll is_less ,ll has_369,ll mod3){
+    if(idx>=n.size()){
+        return has_369 || mod3==0;
     }
+    ll &cache = dp[idx][is_less][has_369][mod3];
+    if(cache!=-1)return cache;
 
-    // tight가 false면 이미 N보다 작은 숫자임
-    // 이 상태는 다시 나올 수 있으므로 메모이제이션 가능
-    if (!tight && memo[pos][rem] != -1) {
-        return memo[pos][rem];
+    ll limit = is_less ? 9:n[idx]-'0';
+    ll ret = 0;
+    for(ll i= 0;i<=limit;i++){
+        ll next_is_less = is_less || (i<(n[idx]-'0'));
+        ll next_has_369 = has_369 || (i==3||i==6||i==9);
+        ll next_mod3 = (mod3*10 + i)%3;
+
+        ret = (ret + dfs(idx+1,next_is_less, next_has_369,next_mod3))%mod;
     }
+    return cache = ret;
 
-    int limit = tight ? N[pos] - '0' : 9;
-
-    long long result = 0;
-
-    for (int d = 0; d <= limit; d++) {
-        // 숫자에 3, 6, 9가 들어가면 박수 대상이므로 제외
-        if (!allowedDigit(d)) continue;
-
-        bool nextTight = tight && (d == limit);
-        int nextRem = (rem + d) % 3;
-
-        result += dfs(pos + 1, nextRem, nextTight);
-        result %= MOD;
-    }
-
-    if (!tight) {
-        memo[pos][rem] = result;
-    }
-
-    return result;
 }
+void solve(){
+    memset(dp,-1,sizeof(dp));
+    ll ret = dfs(0,0,0,0);
+    
+    cout<<(ret-1)%mod<<endl;
+}
+int main(){
 
-int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    input();
+    solve();
 
-    cin >> N;
-
-    L = N.size();
-
-    memset(memo, -1, sizeof(memo));
-
-    // N은 너무 크므로 MOD 값만 계산
-    long long nMod = 0;
-    for (char c : N) {
-        nMod = (nMod * 10 + (c - '0')) % MOD;
-    }
-
-    // 박수를 안 치는 숫자 개수
-    long long noClap = dfs(0, 0, true);
-
-    // 전체 숫자는 1부터 N까지 총 N개
-    // 답 = 전체 개수 - 박수 안 치는 숫자 개수
-    long long answer = (nMod - noClap + MOD) % MOD;
-
-    cout << answer << '\n';
-
-    return 0;
 }
